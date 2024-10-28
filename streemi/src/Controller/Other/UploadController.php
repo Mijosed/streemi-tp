@@ -13,6 +13,6 @@ class UploadController extends AbstractController
     #[Route(path:'/upload', name: 'page_upload')]
     public function upload(): Response
     {
-        return $this->render(view: 'upload/upload.html.twig');
+        return $this->render(view: 'other/upload.html.twig');
     }
 }
