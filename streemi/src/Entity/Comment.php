@@ -6,6 +6,7 @@ use App\Enum\CommentStatusEnum;
 use App\Repository\CommentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
@@ -16,11 +17,21 @@ class Comment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
     #[ORM\Column(enumType: CommentStatusEnum::class)]
     private ?CommentStatusEnum $status = null;
+
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'childComments')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
+    private ?self $parentComment = null;
+
+    /**
+     * @var Collection<int, self>
+     */
+    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parentComment')]
+    private Collection $childComments;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
@@ -28,25 +39,11 @@ class Comment
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Media $comments = null;
-
-    #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?Media $media = null;
-
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'childComment')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?self $parentComment = null;
-
-    /**
-     * @var Collection<int, self>
-     */
-    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parentComment')]
-    private Collection $childComment;
-
+    
     public function __construct()
     {
-        $this->childComment = new ArrayCollection();
+        $this->childComments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -78,42 +75,6 @@ class Comment
         return $this;
     }
 
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?User $author): static
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    public function getComments(): ?Media
-    {
-        return $this->comments;
-    }
-
-    public function setComments(?Media $comments): static
-    {
-        $this->comments = $comments;
-
-        return $this;
-    }
-
-    public function getMedia(): ?Media
-    {
-        return $this->media;
-    }
-
-    public function setMedia(?Media $media): static
-    {
-        $this->media = $media;
-
-        return $this;
-    }
-
     public function getParentComment(): ?self
     {
         return $this->parentComment;
@@ -129,15 +90,15 @@ class Comment
     /**
      * @return Collection<int, self>
      */
-    public function getChildComment(): Collection
+    public function getChildComments(): Collection
     {
-        return $this->childComment;
+        return $this->childComments;
     }
 
     public function addChildComment(self $childComment): static
     {
-        if (!$this->childComment->contains($childComment)) {
-            $this->childComment->add($childComment);
+        if (!$this->childComments->contains($childComment)) {
+            $this->childComments->add($childComment);
             $childComment->setParentComment($this);
         }
 
@@ -146,12 +107,36 @@ class Comment
 
     public function removeChildComment(self $childComment): static
     {
-        if ($this->childComment->removeElement($childComment)) {
+        if ($this->childComments->removeElement($childComment)) {
             // set the owning side to null (unless already changed)
             if ($childComment->getParentComment() === $this) {
                 $childComment->setParentComment(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): static
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getMedia(): ?Media
+    {
+        return $this->media;
+    }
+
+    public function setMedia(?Media $media): static
+    {
+        $this->media = $media;
 
         return $this;
     }
