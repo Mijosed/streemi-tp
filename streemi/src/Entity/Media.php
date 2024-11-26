@@ -20,9 +20,6 @@ class Media
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(enumType: MediaTypeEnum::class)]
-    private ?MediaTypeEnum $mediaType = null;
-
     #[ORM\Column(length: 255)]
     private ?string $shortDescription = null;
 
@@ -86,18 +83,6 @@ class Media
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMediaType(): ?MediaTypeEnum
-    {
-        return $this->mediaType;
-    }
-
-    public function setMediaType(MediaTypeEnum $mediaType): static
-    {
-        $this->mediaType = $mediaType;
-
-        return $this;
     }
 
     public function getShortDescription(): ?string
