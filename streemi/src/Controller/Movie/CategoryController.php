@@ -8,17 +8,15 @@ use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Category;
 
 class CategoryController extends AbstractController
 {
     #[Route(path:'/category/{id}', name: 'page_detail_category')]
     public function detail(
-        string $id,
-        CategoryRepository $categoryRepository
+        Category $category
     ): Response
     {
-        $category = $categoryRepository->find($id);
-
         return $this->render('movie/category.html.twig', ['category' => $category]);
     }
 
