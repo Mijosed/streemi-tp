@@ -10,19 +10,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AuthController extends AbstractController
 {
-    #[Route(path:'/login_2', name: 'page_login')]
-    public function login(): Response
-    {
-        return $this->render(view: 'auth/login.html.twig');
-    }
+    // #[Route(path:'/login_2', name: 'page_login')]
+    // public function login(): Response
+    // {
+    //     return $this->render(view: 'auth/login.html.twig');
+    // }
 
     #[Route(path:'/register', name: 'page_register')]
     public function register(): Response
     {
         return $this->render(view: 'auth/register.html.twig');
     }
-
-    //forgot, reset, confirm 
 
     #[Route(path:'/forgot', name: 'page_forgot')]
     public function forgot(): Response
