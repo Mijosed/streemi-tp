@@ -7,6 +7,9 @@ App\Entity\User:
     profilePicture: 'https://picsum.photos/400/400?random=<numberBetween(1, 100)>'
     accountStatus: 'active'
 
+  user_super_admin (extends user_template):
+    email: 'mijosed@gmail.com'
+
   user_admin (extends user_template):
     email: 'admin\@example.com'
     password: 'motdepasse'
