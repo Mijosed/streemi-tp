@@ -14,3 +14,12 @@ App\Entity\Language:
   de:
     name: 'Allemand'
     code: 'DE'
+  nl:
+    name: 'Néerlandais'
+    code: 'NL'
+  pt:
+    name: 'Portugais'
+    code: 'PT'
+  ru:
+    name: 'Russe'
+    code: 'RU'

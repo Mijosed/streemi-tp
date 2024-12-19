@@ -44,6 +44,7 @@ class ResetPwdController extends AbstractController
     public function resetPassword(
         string $uid,
         UserRepository $userRepository,
+        AuthMailer $authMailer,
         Request $request,
         EntityManagerInterface $entityManager
     ): Response {
@@ -63,9 +64,10 @@ class ResetPwdController extends AbstractController
                 $user->setResetPasswordToken(null);
                 $user->setPlainPassword($data['plainPassword']);
                 $entityManager->flush();
+                $authMailer->sendResetEmail($user);
 
                 $this->addFlash('success', 'Mot de passe réinitialisé');
-                return $this->redirectToRoute('page_login');
+                return $this->redirectToRoute('app_login');
             }
 
             $this->addFlash('error', 'Les mots de passe ne correspondent pas');

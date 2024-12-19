@@ -8,3 +8,9 @@ App\Entity\Category:
   category_comedie:
     name: Comedie
     label: Comedie
+  category_drama:
+    name: Drama
+    label: Drama
+  category_fantastic: 
+    name: Fantastic
+    label: Fantastic
