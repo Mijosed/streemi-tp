@@ -12,7 +12,7 @@ use App\Entity\Category;
 
 class CategoryController extends AbstractController
 {
-    #[Route(path:'/category/{id}', name: 'page_detail_category')]
+    #[Route(path:'/categories/{id}', name: 'page_detail_category')]
     public function detail(
         Category $category
     ): Response

@@ -1,7 +1,7 @@
 App\Entity\Media:
   media (template):
     title: 'Media <current()>'
-    shortDescription: 'short description'
+    shortDescription: 'Je suis une description courte'
     longDescription: '<realText()>'
     releaseDate: '<datetime()>'
     coverImage: 'https://picsum.photos/400/550?random=<numberBetween(1, 100)>'
@@ -22,6 +22,9 @@ App\Entity\Season:
     seasonNumber: '<numberBetween(1, 10)>'
     serie: '<current()>'
   season_3_{@media_serie*}:
+    seasonNumber: '<numberBetween(1, 10)>'
+    serie: '<current()>'
+  season_4_{@media_serie*}:
     seasonNumber: '<numberBetween(1, 10)>'
     serie: '<current()>'
 

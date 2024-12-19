@@ -1,23 +1,23 @@
 App\Entity\Subscription:
   subscription_monthly:
     name: 'Abonnement mensuel'
-    price: 999
+    price: 60
     duration: 1
   subscription_annual:
     name: 'Abonnement annuel'
-    price: 9999
+    price: 600
     duration: 12
   subscription_lifetime:
     name: 'Abonnement à vie'
-    price: 99999
+    price: 60000
     duration: 9999
   subscription_3_months:
     name: 'Abonnement 3 mois'
-    price: 2999
+    price: 150
     duration: 3
   subscription_6_months:
     name: 'Abonnement 6 mois'
-    price: 5999
+    price: 300
     duration: 6
 
 App\Entity\SubscriptionHistory:
