@@ -3,7 +3,7 @@ App\Entity\User:
   user_template (template):
     email: '<email()>'
     username: '<userName()>'
-    plainPassword: 'salut'
+    plainPassword: 'test'
     profilePicture: 'https://picsum.photos/400/400?random=<numberBetween(1, 100)>'
     accountStatus: 'active'
 

@@ -1,16 +1,20 @@
 App\Entity\Subscription:
+  subscription_life:
+    name: 'Abonnement à vie'
+    price: 60000
+    duration: 9999
   subscription_monthly:
     name: 'Abonnement mensuel'
     price: 60
     duration: 1
+  subscription_special_offer:
+    name: 'Abonnement special'
+    price: 450
+    duration: 12
   subscription_annual:
     name: 'Abonnement annuel'
     price: 600
     duration: 12
-  subscription_lifetime:
-    name: 'Abonnement à vie'
-    price: 60000
-    duration: 9999
   subscription_3_months:
     name: 'Abonnement 3 mois'
     price: 150
